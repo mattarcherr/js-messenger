@@ -1,20 +1,30 @@
 {
-  "name": "first",
-  "productName": "test",
+  "name": "client",
+  "productName": "client",
   "version": "1.0.0",
-  "description": "first app",
+  "description": "Messenger Client",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "electron-builder"
   },
   "author": "Matthew Archer",
   "license": "MIT",
   "dependencies": {
-    "electron": "^25.5.0",
     "express": "^4.18.2",
     "jquery": "^3.7.0",
     "socket.io": "^4.7.2",
     "toastify-js": "^1.12.0"
+  },
+  "devDependencies": {
+    "electron": "^25.5.0",
+    "electron-builder": "^24.6.3"
+  },
+  "build": {
+    "appId": "com.co.msg",
+    "directories": {
+      "output": "build"
+    }
   }
 }
