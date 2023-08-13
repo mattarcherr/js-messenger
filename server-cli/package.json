@@ -1,0 +1,8 @@
+{
+    "name": "server-cli",
+    "version": "1.0.0",
+    "description": "Server-side cli application",
+    "dependencies": {
+        "express": "^4.18.2"
+    }
+}
