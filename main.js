@@ -8,7 +8,7 @@ function createMainWindow() {
         height: 600
     });
 
-    if (process.env.NODE_ENV !== 'development') {
+    if (process.env.NODE_ENV !== 'production') {
         mainWindow.webContents.openDevTools();
     }
 
@@ -22,7 +22,12 @@ function createConnectWindow() {
         height: 300
     });
 
+    if (process.env.NODE_ENV !== 'production') {
+        connectWindow.webContents.openDevTools();
+    }
+
     connectWindow.loadFile(path.join(__dirname, './app/connect.html'));
+    connectWindow.setMenu(null);
 }
 
 // App is ready
@@ -40,7 +45,7 @@ const menu = [
         submenu: [
             {
                 label: 'Connect',
-                click: () => createConnectWindow,
+                click: () => createConnectWindow(),
             },
             {
                 label: 'Quit',

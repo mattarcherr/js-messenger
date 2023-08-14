@@ -35,7 +35,10 @@
                 if (msg === "") return;
 
                 $("#chatbox").append('<li>'+ msg +'</li>');
-                socket.emit('msg', msg);
+
+                var messageObj = {name: "matt", msg: msg}
+
+                socket.emit('msg', messageObj);
                 document.getElementById("usermsg").value = "";
             }
         </script>
