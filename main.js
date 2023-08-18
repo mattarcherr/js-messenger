@@ -1,5 +1,5 @@
 const path = require('path');
-const { app, BrowserWindow, Menu } = require('electron');
+const { app, BrowserWindow, Menu, ipcMain } = require('electron');
 
 function createMainWindow() {
     const mainWindow = new BrowserWindow({
@@ -29,6 +29,10 @@ function createConnectWindow() {
     connectWindow.loadFile(path.join(__dirname, './app/connect.html'));
     connectWindow.setMenu(null);
 }
+
+ipcMain.on('gotURL', (event, arg) => {
+    connectWindow.webContents.send('submitURL', arg);
+});
 
 // App is ready
 app.whenReady().then(() => {
