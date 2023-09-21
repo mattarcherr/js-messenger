@@ -13,6 +13,7 @@ app.get('/', (req, res) => {
   res.send('<script src="/socket.io/socket.io.js"></script><script>var socket = io();</script>');
 });
 
+
 io.on('connection', (socket) => {
   var userName;
 
@@ -20,17 +21,29 @@ io.on('connection', (socket) => {
     userName = msg;
     console.log(userName + ' connected');
     log.push(userName + ' connected');
+
+    io.emit('connection', {
+      name: userName
+    });
   });
 
   socket.on('msg', (msg) => {
-    console.log(userName+": "+msg['msg']);
-
+    console.log(userName+": "+msg['msg'])
     log.push(userName+": "+msg['msg'])
+
+    io.emit('new message', {
+      name: userName,
+      msg: msg
+    });
   });
 
   socket.on('disconnect', () => {
     console.log(userName + ' disconnected');
     log.push(userName + ' disconnected');
+
+    io.emit('disconnection', {
+      name: userName
+    });
   });
 });
 
