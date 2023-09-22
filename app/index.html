@@ -10,13 +10,13 @@
         socket.emit('name', "matt");
 
         socket.on('connection', (msg) => {
-            console.log(msg);
+            $("#chatbox").append('<li>User '+msg['name']+' connected</li>');
         });
         socket.on('new message', (msg) => {
-            console.log(msg);
+            $("#chatbox").append('<li>'+msg['name']+": "+msg['msg']+'</li>');
         });
         socket.on('disconnection', (msg) => {
-            console.log(msg);
+            $("#chatbox").append('<li>User '+msg['name']+' disconnected</li>');
         });
     </script>
 
@@ -47,11 +47,8 @@
                 var msg = document.getElementById("usermsg").value;
                 if (msg === "") return;
 
-                $("#chatbox").append('<li>'+ msg +'</li>');
 
-                var messageObj = {name: "matt", msg: msg}
-
-                socket.emit('msg', messageObj);
+                socket.emit('msg', msg);
                 document.getElementById("usermsg").value = "";
             }
         </script>

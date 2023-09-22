@@ -28,8 +28,8 @@ io.on('connection', (socket) => {
   });
 
   socket.on('msg', (msg) => {
-    console.log(userName+": "+msg['msg'])
-    log.push(userName+": "+msg['msg'])
+    console.log(userName+": "+msg)
+    log.push(userName+": "+msg)
 
     io.emit('new message', {
       name: userName,
