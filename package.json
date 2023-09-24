@@ -1,30 +1,55 @@
 {
-  "name": "client",
-  "productName": "client",
+  "name": "chat-client",
+  "productName": "chat-client",
   "version": "1.0.0",
-  "description": "Messenger Client",
-  "main": "main.js",
-  "scripts": {
-    "start": "electron .",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "electron-builder"
-  },
-  "author": "Matthew Archer",
-  "license": "MIT",
+  "private": true,
   "dependencies": {
+    "@electron/remote": "^2.0.11",
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "bootstrap": "^5.3.2",
+    "concurrently": "^8.2.1",
+    "cross-env": "^7.0.3",
+    "electron": "^26.2.2",
     "express": "^4.18.2",
-    "jquery": "^3.7.0",
+    "jquery": "^3.7.1",
+    "react": "^18.2.0",
+    "react-bootstrap": "^2.8.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "5.0.1",
     "socket.io": "^4.7.2",
-    "toastify-js": "^1.12.0"
+    "toastify-js": "^1.12.0",
+    "wait-on": "^7.0.1",
+    "web-vitals": "^2.1.4"
   },
-  "devDependencies": {
-    "electron": "^25.5.0",
-    "electron-builder": "^24.6.3"
+  "main": "public/main.js",
+  "homepage": "./",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "electron:serve": "concurrently -k \"cross-env BROWSER=none npm start\" \"npm run electron:start\"",
+    "electron:build": "concurrently -k \"cross-env BROWSER=none npm start",
+    "electron:start": "wait-on tcp:3000 && electron ."
   },
-  "build": {
-    "appId": "com.co.msg",
-    "directories": {
-      "output": "build"
-    }
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
