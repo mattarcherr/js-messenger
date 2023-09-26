@@ -1,19 +1,29 @@
-export const SplitScreen = ({
+import styled from 'styled-components'
+
+const Container = styled.div`
+    display: flex;
+`;
+
+const Pane = styled.div`
+    flex: 1;
+`;
+
+export const Layout = ({
     main: Main,
     left: Left,
     bottom: Bottom,
 }) => {
     return (
-        <div>
-            <div>
+        <Container>
+            <Pane>
                 <Main />
-            </div>
-            <div>
+            </Pane>
+            <Pane>
                 <Left />
-            </div>
-            <div>
+            </Pane>
+            <Pane>
                 <Bottom />
-            </div>
-        </div>
+            </Pane>
+        </Container>
     );
 }

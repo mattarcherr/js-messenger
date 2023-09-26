@@ -28,7 +28,7 @@
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script src="%PUBLIC_URL%/socket.io.js"></script>
     <script>
-      var socket = io('http://192.168.1.17:3001', { transports : ['websocket'] });;
+      var socket = io('http://localhost:3001', { transports : ['websocket'] });;
       socket.emit('name', 'matt');
 
       // socket.on('connection', (msg) => {
