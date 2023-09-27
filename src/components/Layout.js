@@ -1,29 +1,21 @@
-import styled from 'styled-components'
-
-const Container = styled.div`
-    display: flex;
-`;
-
-const Pane = styled.div`
-    flex: 1;
-`;
-
 export const Layout = ({
+    top: Top,
     main: Main,
     left: Left,
     bottom: Bottom,
 }) => {
     return (
-        <Container>
-            <Pane>
+        <div style={{display: "flex", flexDirection: "column"}}>
+            <div> 
+                <Top />
+            </div>
+            <div style={{display: "flex"}}>
                 <Main />
-            </Pane>
-            <Pane>
                 <Left />
-            </Pane>
-            <Pane>
+            </div>
+            <div>
                 <Bottom />
-            </Pane>
-        </Container>
+            </div>
+        </div>
     );
 }
