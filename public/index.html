@@ -27,21 +27,6 @@
     <title>Chat Client</title>
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script src="%PUBLIC_URL%/socket.io.js"></script>
-    <script>
-      var socket = io('http://localhost:3001', { transports : ['websocket'] });;
-      socket.emit('name', 'matt');
-
-      // socket.on('connection', (msg) => {
-      //       $("#chatbox").append('<li>User '+msg['name']+' connected</li>');
-      // });
-      // socket.on('new message', (msg) => {
-      //     $("#chatbox").append('<li>'+msg['name']+": "+msg['msg']+'</li>');
-      // });
-      // socket.on('disconnection', (msg) => {
-      //     $("#chatbox").append('<li>User '+msg['name']+' disconnected</li>');
-      // });
-    </script>
-
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
