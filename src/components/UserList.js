@@ -1,5 +1,5 @@
 export default function UserList() {
-    const users = this.props.users
+    const users = []; 
 
     return (
     <div style={{height: 425, width: 200, position: "relative"}}>
