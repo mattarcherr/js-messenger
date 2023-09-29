@@ -1,9 +1,11 @@
-export const Layout = ({
-    top: Top,
-    main: Main,
-    left: Left,
-    bottom: Bottom,
-}) => {
+export default function Layout({
+    Top,
+    Main,
+    Left,
+    Bottom,
+    users
+})   {
+    // console.log(users);
     return (
         <div style={{display: "flex", flexDirection: "column"}}>
             <div> 
@@ -11,7 +13,7 @@ export const Layout = ({
             </div>
             <div style={{display: "flex"}}>
                 <Main />
-                <Left />
+                <Left users={users}/>
             </div>
             <div>
                 <Bottom />

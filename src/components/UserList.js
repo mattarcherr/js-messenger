@@ -1,5 +1,10 @@
-export default function UserList() {
-    const users = []; 
+import { socket } from '../socket'
+import { useState } from 'react'
+
+
+
+export default function UserList({ users }) {
+    console.log(users)
 
     return (
     <div style={{height: 425, width: 200, position: "relative"}}>
