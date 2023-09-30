@@ -25,7 +25,7 @@ io.on('connection', (socket) => {
   socket.on('name', (msg) => {
     userName = msg;
     console.log(userName + ' connected');
-    log.push(userName + ' connected');
+    log.push({username: "server", message: userName+" has connected"});
     connectedUsers.push(userName);
     io.emit('connection',
       connectedUsers
@@ -34,17 +34,19 @@ io.on('connection', (socket) => {
 
   socket.on('msg', (msg) => {
     console.log(userName+": "+msg)
-    log.push(userName+": "+msg)
+    log.push({
+      username: userName,
+      message: msg
+    });
 
     io.emit('new message', {
-      name: userName,
-      msg: msg
+      log
     });
   });
 
   socket.on('disconnect', () => {
     console.log(userName + ' disconnected');
-    log.push(userName + ' disconnected');
+    log.push({username: "server", message: userName+" has disconnected"});
     connectedUsers.splice(connectedUsers.indexOf(userName), 1);
 
     io.emit('disconnection', {

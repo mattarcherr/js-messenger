@@ -3,7 +3,8 @@ export default function Layout({
     Main,
     Left,
     Bottom,
-    users
+    users,
+    log
 })   {
     // console.log(users);
     return (
@@ -12,7 +13,7 @@ export default function Layout({
                 <Top />
             </div>
             <div style={{display: "flex"}}>
-                <Main />
+                <Main log={log}/>
                 <Left users={users}/>
             </div>
             <div>
