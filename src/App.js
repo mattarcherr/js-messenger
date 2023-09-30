@@ -11,8 +11,8 @@ import { socket } from './socket'
 
 export default function App() {
   const [isConnected, setIsConnected] = useState(socket.connected);
-  const [Events, setFooEvents] = useState([]);
-  const [ users, setUsers] = useState(["test"]);
+  const [ users, setUsers] = useState(["test123", "Cas"]);
+  const [ msgLog, setMsgLog] = useState([]);
 
   useEffect(() => {
     function onConnect() {
@@ -25,19 +25,17 @@ export default function App() {
     }
 
     function onNewConnection(msg) {
-      console.log("vasd");
-      console.log(msg);
-      setUsers([users, msg]);
+      setUsers(msg);
     }
 
     socket.on('connect', onConnect);
     socket.on('disconnect', onDisconnect);
-    socket.on('msg',onNewConnection);
+    socket.on('connection',onNewConnection);
 
     return () => {
       socket.off('connect', onConnect);
       socket.off('disconnect', onDisconnect);
-      socket.off('foo',onNewConnection);
+      socket.off('connection',onNewConnection);
     };
   }, []);
 

@@ -4,8 +4,6 @@ import { useState } from 'react'
 
 
 export default function UserList({ users }) {
-    console.log(users)
-
     return (
     <div style={{height: 425, width: 200, position: "relative"}}>
         <p style={{textAlign: "center", fontSize: 20}}>Room User List</p>
