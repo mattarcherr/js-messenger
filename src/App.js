@@ -24,25 +24,27 @@ export default function App() {
       setIsConnected(false);
     }
 
-    function onNewConnection(msg) {
-      setUsers(msg);
+    function onUserChange(msg) {
+      setUsers(msg['users']);
+      setLog(msg['log']);
     }
 
     function onNewMessage(msg) {
-      console.log(msg);
       setLog(msg['log'])
     }
 
-    socket.on('connect', onConnect);
-    socket.on('disconnect', onDisconnect);
-    socket.on('connection',onNewConnection);
-    socket.on('new message', onNewMessage);
+    socket.on('connect',       onConnect);
+    socket.on('disconnect',    onDisconnect);
+    socket.on('connection',    onUserChange);
+    socket.on('disconnection', onUserChange);
+    socket.on('new message',   onNewMessage);
 
     return () => {
-      socket.off('connect', onConnect);
-      socket.off('disconnect', onDisconnect);
-      socket.off('connection',onNewConnection);
-      socket.off('new message', onNewMessage);
+      socket.off('connect',       onConnect);
+      socket.off('disconnect',    onDisconnect);
+      socket.off('connection',    onUserChange);
+      socket.off('disconnection', onUserChange);
+      socket.off('new message',   onNewMessage);
     };
   }, []);
 

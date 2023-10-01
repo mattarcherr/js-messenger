@@ -14,8 +14,7 @@ var log = [];
 var connectedUsers = [];
 
 app.get('/', (req, res) => {
-  res.send('<script src="https://cdn.socket.io/3.1.3/socket.io.min.js" integrity="sha384-cPwlPLvBTa3sKAgddT6krw0cJat7egBga3DJepJyrLl4Q9/5WLra3rrnMcyTyOnh" crossorigin="anonymous"></script><script>var socket = io();</script>');
-  // res.send("Hello World!")
+  res.send("Hello World!")
 });
 
 
@@ -27,9 +26,10 @@ io.on('connection', (socket) => {
     console.log(userName + ' connected');
     log.push({username: "server", message: userName+" has connected"});
     connectedUsers.push(userName);
-    io.emit('connection',
-      connectedUsers
-    );
+    io.emit('connection', { 
+      users:connectedUsers,
+      log:log
+    });
   });
 
   socket.on('msg', (msg) => {
@@ -50,7 +50,8 @@ io.on('connection', (socket) => {
     connectedUsers.splice(connectedUsers.indexOf(userName), 1);
 
     io.emit('disconnection', {
-      name: userName
+      useers:connectedUsers,
+      log:log
     });
   });
 });
