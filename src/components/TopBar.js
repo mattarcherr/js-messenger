@@ -1,7 +1,9 @@
-export default function MessageBox() {
+export default function MessageBox( serverName ) {
+    serverName=serverName['serverName']
+    console.log(serverName);
     return (
     <div style={{height: 75, width: 800}}>
-        <h1>http://localhost:3001</h1>
+        <h1>{ serverName }</h1>
     </div>
     )
 }

@@ -50,7 +50,7 @@ io.on('connection', (socket) => {
     connectedUsers.splice(connectedUsers.indexOf(userName), 1);
 
     io.emit('disconnection', {
-      useers:connectedUsers,
+      users:connectedUsers,
       log:log
     });
   });

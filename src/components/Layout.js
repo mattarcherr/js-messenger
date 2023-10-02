@@ -4,13 +4,14 @@ export default function Layout({
     Left,
     Bottom,
     users,
-    log
+    log,
+    serverName
 })   {
-    // console.log(users);
+    console.log(serverName);
     return (
         <div style={{display: "flex", flexDirection: "column"}}>
             <div> 
-                <Top />
+                <Top serverName={serverName}/>
             </div>
             <div style={{display: "flex"}}>
                 <Main log={log}/>

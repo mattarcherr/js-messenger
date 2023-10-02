@@ -13,10 +13,13 @@ export default function App() {
   const [isConnected, setIsConnected] = useState(socket.connected);
   const [ users, setUsers] = useState([]);
   const [ log, setLog] = useState([]);
+  const [ serverName, setServerName ] = useState();
+  console.log(typeof serverName);
 
   useEffect(() => {
     function onConnect() {
       socket.emit("name", "matt");
+      setServerName('http://localhost:4000');
       setIsConnected(true);
     }
 
@@ -57,6 +60,7 @@ export default function App() {
         Bottom={MessageBox}
         users={users}
         log={log}
+        serverName={serverName}
       />
     </div>
   );
