@@ -1,3 +1,5 @@
+import '../App.css'
+
 export default function Layout({
     Top,
     Main,
@@ -9,15 +11,17 @@ export default function Layout({
 })   {
     console.log(serverName);
     return (
-        <div style={{display: "flex", flexDirection: "column"}}>
-            <div> 
+        <div class="grid-container">
+            <div id='topbar'> 
                 <Top serverName={serverName}/>
             </div>
-            <div style={{display: "flex"}}>
+            <div id='chatbox'>
                 <Main log={log}/>
+            </div>
+            <div id='userlist'>
                 <Left users={users}/>
             </div>
-            <div>
+            <div id='messagebox'>
                 <Bottom />
             </div>
         </div>
