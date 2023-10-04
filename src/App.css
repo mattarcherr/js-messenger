@@ -1,19 +1,46 @@
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    /* align-items: stretch; */
+}
+
+#root {
+    width: 100%;
+    display: grid;
+    grid-template-rows: 50px minmax(0, 90%) minmax(10%, 50px); /* bottom row always visible */
+    grid-template-columns: 1fr 3fr 1fr;
+}
+
 #TopBar-div {
     background-color: red;
+    grid-column: 2;
+    grid-row: 1;
 }
 
 #ConnectSideBar-div {
     background-color: blue;
+    grid-column: 1;
+    grid-row: 1 / 4;
 }
 
 #ChatBox-div{
     background-color: green;
+    overflow: auto;
+    grid-column: 2;
+    grid-row: 2;
 }
 
 #UserList-div {
     background-color: orange;
+    grid-column: 3;
+    grid-row: 1 / 4;
 }
 
 #MessageBox-div {
     background-color: purple;
+    grid-column: 2;
+    grid-row: 3;
 }

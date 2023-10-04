@@ -8,13 +8,13 @@ export default function UserList({ users }) {
     <div id='UserList-div'>
         <p id='UserListTitle'>Room User List</p>
         <div id='UserList'>
-            <ul>
+            {/* <ul>
                 {users.length === 0 ? <li>Room Empty!</li> :
                     users.map(item =>
                         <li key={item}>{item}</li>    
                     )
                 }
-            </ul>
+            </ul> */}
         </div>
     </div>
     )
