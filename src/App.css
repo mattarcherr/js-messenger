@@ -1,0 +1,19 @@
+#TopBar-div {
+    background-color: red;
+}
+
+#ConnectSideBar-div {
+    background-color: blue;
+}
+
+#ChatBox-div{
+    background-color: green;
+}
+
+#UserList-div {
+    background-color: orange;
+}
+
+#MessageBox-div {
+    background-color: purple;
+}

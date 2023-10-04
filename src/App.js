@@ -1,10 +1,11 @@
 import React, { useState, useEffect} from 'react';
+import './App.css'
 
 import ChatBox from './components/ChatBox'
 import UserList from './components/UserList'
 import MessageBox from './components/MessageBox'
 import TopBar from './components/TopBar'
-import ConnectionSidebar from './components/ConnectSidebar';
+import ConnectionSideBar from './components/ConnectSideBar';
 
 import { socket } from './socket'
 
@@ -43,7 +44,7 @@ export default function App() {
 
   return (<>
       <TopBar serverName={serverName}/>
-      <ConnectionSidebar />
+      <ConnectionSideBar />
       <ChatBox log={log}/>
       <UserList users={users}/>
       <MessageBox />
