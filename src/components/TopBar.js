@@ -1,9 +1,10 @@
 export default function MessageBox( serverName ) {
+    console.log(serverName)
     serverName=serverName['serverName']
-    console.log(serverName);
     return (
-    <div style={{height: 75, width: 800}}>
+    <div id='TopBar-div'>
         <h1>{ serverName }</h1>
+        {/* <h1>TITLE</h1> */}
     </div>
     )
 }
