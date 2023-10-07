@@ -10,7 +10,7 @@ body {
 #root {
     width: 100%;
     display: grid;
-    grid-template-rows: 50px minmax(0, 90%) minmax(10%, 50px); /* bottom row always visible */
+    grid-template-rows: 50px minmax(0, 90%) minmax(7%, 30px); /* bottom row always visible */
     grid-template-columns: 1fr 3fr 1fr;
 }
 
@@ -35,12 +35,36 @@ body {
 
 #UserList-div {
     background-color: orange;
+    overflow: auto;
     grid-column: 3;
     grid-row: 1 / 4;
 }
 
 #MessageBox-div {
-    background-color: purple;
     grid-column: 2;
     grid-row: 3;
+}
+
+/* Components */
+
+/* MessageBox */
+
+#submitForm {
+    height: 100%;
+    display: flex;
+}
+
+#messageInput {
+    height: 100%;
+    width: 90%;
+    border: none;
+}
+
+#sendButton {
+    height: 99.9%;
+    width: 10%;
+    min-width: 50px;
+    text-decoration: none;
+    display: inline-block;
+    border: none;
 }
