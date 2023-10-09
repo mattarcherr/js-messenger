@@ -27,14 +27,14 @@ body {
 }
 
 #ChatBox-div{
-    background-color: green;
+    background-color: #646b62dc;
     overflow: auto;
     grid-column: 2;
     grid-row: 2;
 }
 
 #UserList-div {
-    background-color: orange;
+    background-color: #4e574548;
     overflow: auto;
     grid-column: 3;
     grid-row: 1 / 4;
@@ -67,4 +67,44 @@ body {
     text-decoration: none;
     display: inline-block;
     border: none;
+}
+
+/* User List */
+
+#UserListTitle-div {
+    width: 100%;
+    height: 52px;
+}
+
+#UserListTitle {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+}
+
+
+#UserList-div {
+    display: flex;
+    flex-direction: column;
+}
+
+#UserList {
+    border: 1px solid black;
+    width: 80%;
+    height: 100%;
+    margin: auto;
+}
+
+#UserListList {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+#UserListElement {
+    background-color: gray;
+    color: white
 }
