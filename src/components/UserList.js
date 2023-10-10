@@ -18,6 +18,7 @@ export default function UserList({ users }) {
                 }
             </ul>
         </div>
+        <div id='UserListBottom-div' />
     </div>
     )
 }

@@ -14,14 +14,16 @@ body {
     grid-template-columns: 1fr 3fr 1fr;
 }
 
+/* Components */
+
 #TopBar-div {
-    background-color: red;
+    background-color: #4e574548;
     grid-column: 2;
     grid-row: 1;
 }
 
 #ConnectSideBar-div {
-    background-color: blue;
+    background-color: #4e574548;
     grid-column: 1;
     grid-row: 1 / 4;
 }
@@ -45,7 +47,6 @@ body {
     grid-row: 3;
 }
 
-/* Components */
 
 /* MessageBox */
 
@@ -73,7 +74,7 @@ body {
 
 #UserListTitle-div {
     width: 100%;
-    height: 52px;
+    height: 51px;
 }
 
 #UserListTitle {
@@ -107,4 +108,43 @@ body {
 #UserListElement {
     background-color: gray;
     color: white
+}
+
+#UserListBottom-div {
+    height: 50px;
+    min-height: 7%;
+}
+
+/* TopBar */
+
+#TopBarTitle {
+    text-align: center;
+    margin: auto;
+}
+
+/* ConnectionSideBar */
+
+#ConnectSideBarTitle {
+    text-align: center;
+}
+
+#ConnectSideBarTitle-div {
+    height: 50px;
+}
+
+#ConnectionsForm {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    width: 75%;
+    margin: auto;
+}
+
+#NameInput, #ConnectInput{
+    width: 100%;
+}
+
+#ConnectSubmit {
+    margin-top: 10px;
+    display: inherit;
+    margin: auto;
 }
