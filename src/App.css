@@ -117,6 +117,11 @@ body {
 
 /* TopBar */
 
+#TopBar-div {
+    display: flex;
+    align-items: center;
+}
+
 #TopBarTitle {
     text-align: center;
     margin: auto;
@@ -141,6 +146,7 @@ body {
 
 #NameInput, #ConnectInput{
     width: 100%;
+    margin-bottom: 10px;
 }
 
 #ConnectSubmit {

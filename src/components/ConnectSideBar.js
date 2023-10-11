@@ -10,14 +10,14 @@ export default function ConnectionSideBar(props) {
                     var userName = document.getElementById('NameInput');
                     var address = document.getElementById('ConnectInput');
 
-                    props.updateAddress(address.value);
+                    props.connect(address.value, userName.value);
                     userName.value = '';
                     address.value = '';
                 }}>
                     <label htmlFor='NameInput'>Username:</label>
-                    <input type='text' id='NameInput'/>
+                    <input type='text' id='NameInput' required/>
                     <label htmlFor='ConnectInput'>Server Address:</label>
-                    <input type='text' id='ConnectInput'/>
+                    <input type='text' id='ConnectInput' required/>
                     <input type='submit' id='ConnectSubmit'/>
                 </form>
             </div>

@@ -7,27 +7,23 @@ import MessageBox from './components/MessageBox'
 import TopBar from './components/TopBar'
 import ConnectionSideBar from './components/ConnectSideBar';
 
-// import { socket } from './socket'
 import io from 'socket.io-client';
-
 export var socket;
 
 export default function App() {
-  const [ address, setAddress ] = useState('');
-  const [ userName, setUserName ] = useState('');
-
+  const [ connected, setConnected ] = useState(0);
   const [ users, setUsers] = useState([]);
   const [ log, setLog] = useState([]);
   const [ serverName, setServerName ] = useState();
 
-  function updateAddress(address) {
+  function connect(address, userName) {
     console.log(address);
     socket = io(address);
 
     function onConnect() {
-      console.log("onConnect")
-      socket.emit("name", "matt");
-      setServerName('http://localhost:4000');
+      socket.emit("name", userName);
+      setServerName(address);
+      setConnected(1);
     } function onUserChange(msg) {
       setUsers(msg['users']);
       setLog(msg['log']);
@@ -45,8 +41,18 @@ export default function App() {
       socket.off('new message',   onNewMessage);
     }}
 
+    function disconnect() {
+      setConnected(0);
+      setUsers([]);
+      setLog([]);
+      setServerName();
+      socket.disconnect();
+    }
+
   return (<>
-      <TopBar serverName={serverName}/>
+      <TopBar serverName={serverName} 
+              disconnect={disconnect}
+              connected={connected}/>
       <ConnectionSideBar connect={connect}/>
       <ChatBox log={log}/>
       <UserList users={users}/>
