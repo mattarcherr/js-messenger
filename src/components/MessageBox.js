@@ -1,5 +1,4 @@
-import { socket } from '../socket'
-import { Fragment } from 'react';
+import { socket } from '../App'
 
 export default function MessageBox() {
 

@@ -7,21 +7,27 @@ import MessageBox from './components/MessageBox'
 import TopBar from './components/TopBar'
 import ConnectionSideBar from './components/ConnectSideBar';
 
-import { socket } from './socket'
+// import { socket } from './socket'
+import io from 'socket.io-client';
+
+export var socket;
 
 export default function App() {
-  const [isConnected, setIsConnected] = useState(socket.connected);
+  const [ address, setAddress ] = useState('');
+  const [ userName, setUserName ] = useState('');
+
   const [ users, setUsers] = useState([]);
   const [ log, setLog] = useState([]);
   const [ serverName, setServerName ] = useState();
 
-  useEffect(() => {
+  function updateAddress(address) {
+    console.log(address);
+    socket = io(address);
+
     function onConnect() {
+      console.log("onConnect")
       socket.emit("name", "matt");
       setServerName('http://localhost:4000');
-      setIsConnected(true);
-    } function onDisconnect() {
-      setIsConnected(false);
     } function onUserChange(msg) {
       setUsers(msg['users']);
       setLog(msg['log']);
@@ -29,22 +35,19 @@ export default function App() {
       setLog(msg['log'])
     }
     socket.on('connect',       onConnect);
-    socket.on('disconnect',    onDisconnect);
     socket.on('connection',    onUserChange);
     socket.on('disconnection', onUserChange);
     socket.on('new message',   onNewMessage);
     return () => {
       socket.off('connect',       onConnect);
-      socket.off('disconnect',    onDisconnect);
       socket.off('connection',    onUserChange);
       socket.off('disconnection', onUserChange);
       socket.off('new message',   onNewMessage);
-    };
-  }, []);
+    }}
 
   return (<>
       <TopBar serverName={serverName}/>
-      <ConnectionSideBar />
+      <ConnectionSideBar connect={connect}/>
       <ChatBox log={log}/>
       <UserList users={users}/>
       <MessageBox />

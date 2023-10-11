@@ -1,8 +1,3 @@
-import { socket } from '../socket'
-import { useState } from 'react'
-
-
-
 export default function UserList({ users }) {
     return (
     <div id='UserList-div'>
