@@ -50,12 +50,14 @@ export default function App() {
     }
 
   return (<>
-      <TopBar serverName={serverName} 
-              disconnect={disconnect}
-              connected={connected}/>
+      <TopBar 
+        serverName={serverName} 
+        disconnect={disconnect}
+        connected={connected}
+      />
       <ConnectionSideBar connect={connect}/>
       <ChatBox log={log}/>
       <UserList users={users}/>
-      <MessageBox />
+      <MessageBox connected={connected}/>
     </>);
 }

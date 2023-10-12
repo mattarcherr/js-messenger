@@ -1,6 +1,8 @@
 {
-  "name": "chat-client",
-  "productName": "chat-client",
+  "name": "js-messenger",
+  "productName": "js-messenger",
+  "author": "Matt",
+  "description": "Chatroom build using react, electron and socket.io",
   "version": "1.0.0",
   "private": true,
   "dependencies": {
@@ -11,7 +13,6 @@
     "bootstrap": "^5.3.2",
     "concurrently": "^8.2.1",
     "cross-env": "^7.0.3",
-    "electron": "^26.2.2",
     "express": "^4.18.2",
     "jquery": "^3.7.1",
     "react": "^18.2.0",
@@ -24,16 +25,24 @@
     "wait-on": "^7.0.1",
     "web-vitals": "^2.1.4"
   },
+  "devDependencies": {
+    "electron": "^26.2.2",
+    "electron-builder": "^24.6.4"
+  },
   "main": "public/main.js",
-  "homepage": "./",
+  "homepage": ".",
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && rm -rf ./public/build && mv ./build ./public/build && electron-builder",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "electron:serve": "concurrently -k \"cross-env BROWSER=none npm start\" \"npm run electron:start\"",
     "electron:build": "concurrently -k \"cross-env BROWSER=none npm start",
     "electron:start": "wait-on tcp:3000 && electron ."
+  },
+  "build": {
+    "appId": "com.example.app",
+    "extends": null
   },
   "eslintConfig": {
     "extends": [

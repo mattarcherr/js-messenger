@@ -1,6 +1,6 @@
 import { socket } from '../App'
 
-export default function MessageBox() {
+export default function MessageBox(props) {
 
     const handleSend = (e) => {
         e.preventDefault();
@@ -11,6 +11,7 @@ export default function MessageBox() {
         msg.value = "";
     }
 
+    if (props.connected) {
     return (
     <div id='MessageBox-div'>
         <form id='submitForm'>
@@ -18,6 +19,18 @@ export default function MessageBox() {
 
             <input type="submit" value="send" id='sendButton'
              onClick={handleSend} 
+            />
+        </form>
+    </div>
+    )
+    }
+    else return (
+        <div id='MessageBox-div'>
+        <form id='submitForm'>
+            <input type="text" id="messageInput"/>
+
+            <input type="submit" value="send" id='sendButton'
+             disabled onClick={handleSend} 
             />
         </form>
     </div>
