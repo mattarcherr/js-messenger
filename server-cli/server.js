@@ -13,6 +13,10 @@ const io = new Server(server, {
 var log = [];
 var connectedUsers = [];
 
+var room1Pop = 0;
+var room2Pop = 0;
+var room3Pop = 0;
+
 app.get('/', (req, res) => {
   res.send("Hello World!")
 });
@@ -21,6 +25,14 @@ app.get('/', (req, res) => {
 io.on('connection', (socket) => {
   console.log("CONNECTION");
   var userName;
+
+  io.emit('handshake', {
+    rooms:{
+      "room1": room1Pop,
+      "room2": room2Pop,
+      "room3": room3Pop
+    }
+  });
 
   socket.on('name', (msg) => {
     userName = msg;

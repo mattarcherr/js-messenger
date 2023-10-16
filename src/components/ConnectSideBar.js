@@ -20,6 +20,9 @@ export default function ConnectionSideBar(props) {
                     <input type='text' id='ConnectInput' required/>
                     <input type='submit' id='ConnectSubmit'/>
                 </form>
+                <div id='ConnectSideBarRooms-div'>
+                    
+                </div>
             </div>
         </div>
     )
