@@ -1,4 +1,16 @@
-export default function UserList({ users }) {
+export default function UserList(props) {
+    function ifUserIsMe(item) {
+        if (props.id === item['id']) {
+            return <li id='UserListElement'>{item['userName']} (you)</li>
+        }
+        else {
+            return <li id='UserListElement'>{item['userName']}
+            <button id='UserListElementButton' onClick={() => {
+                console.log(item['id'])
+            }}>message</button></li>
+        } 
+    }
+
     return (
     <div id='UserList-div'>
         <div id='UserListTitle-div'>
@@ -6,9 +18,9 @@ export default function UserList({ users }) {
         </div>
         <div id='UserList'>
             <ul id='UserListList'>
-                {users.length === 0 ? <li>Room Empty!</li> :
-                    users.map(item =>
-                        <li id='UserListElement'>{item}</li>    
+                {props.users.length === 0 ? <li>Room Empty!</li> :
+                    props.users.map(item =>
+                        ifUserIsMe(item)   
                     )
                 }
             </ul>

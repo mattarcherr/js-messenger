@@ -13,33 +13,21 @@ const io = new Server(server, {
 var log = [];
 var connectedUsers = [];
 
-var room1Pop = 0;
-var room2Pop = 0;
-var room3Pop = 0;
-
 app.get('/', (req, res) => {
   res.send("Hello World!")
 });
 
 
-io.on('connection', (socket) => {
-  console.log("CONNECTION");
+io.on('connection', async (socket) => {
   var userName;
 
-  io.emit('handshake', {
-    rooms:{
-      "room1": room1Pop,
-      "room2": room2Pop,
-      "room3": room3Pop
-    }
-  });
-
-  socket.on('name', (msg) => {
+  socket.on('handshake', (msg) => {
     userName = msg;
     console.log(userName + ' connected');
     log.push({username: "server", message: userName+" has connected"});
-    connectedUsers.push(userName);
-    io.emit('connection', { 
+    connectedUsers.push({userName: userName, id: socket.id});
+    io.to(socket.id).emit('handshake', socket.id)
+    io.emit('connection', {
       users:connectedUsers,
       log:log
     });
@@ -56,6 +44,10 @@ io.on('connection', (socket) => {
       log
     });
   });
+
+  socket.on("private msg", (recipientId, msg) => {
+    socket.to(recipientId).emit('private msg', socket.id, msg);
+  })
 
   socket.on('disconnect', () => {
     console.log(userName + ' disconnected');

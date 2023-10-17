@@ -1,4 +1,12 @@
 export default function ConnectionSideBar(props) {
+    // function isSelected(item,index) {
+    //     if(item === props.selRoom) {
+    //         return <li id='UserListElement' onClick={() => console.log(index)}>{item}</li>
+    //     } 
+    //     else {
+    //         return <li id='UserListElement' style={{backgroundColor: 'blue'}}>{item}</li>
+    //     }
+    // }
     return (
         <div id='ConnectSideBar-div'>
             <div id='ConnectSideBarTitle-div'>
@@ -21,7 +29,17 @@ export default function ConnectionSideBar(props) {
                     <input type='submit' id='ConnectSubmit'/>
                 </form>
                 <div id='ConnectSideBarRooms-div'>
-                    
+                    <ul id='UserListList'>
+                        {props.rooms.length === 0 ? <li>No rooms</li> :
+                        props.rooms.map( (item,index) => 
+                            <li id='UserListElement'
+                                style={ item === props.selRoom ? {} : {backgroundColor: '#bbbbbb'} }
+                                onClick={() => {
+                                    props.setSelRoom(item);
+                                }}
+                            >{item}</li>
+                        )}
+                    </ul>
                 </div>
             </div>
         </div>

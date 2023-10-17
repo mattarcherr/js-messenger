@@ -110,6 +110,17 @@ body {
     color: white
 }
 
+#UserListElementButton {
+    float: right;
+    width: 50%;
+    height: 24px;
+    padding: 0;
+    border: 0;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    overflow: hidden;
+}
+
 #UserListBottom-div {
     height: 50px;
     min-height: 7%;
@@ -125,6 +136,8 @@ body {
 #TopBarTitle {
     text-align: center;
     margin: auto;
+    font-size: 3vw;
+    overflow: hidden;
 }
 
 /* ConnectionSideBar */
@@ -153,4 +166,12 @@ body {
     margin-top: 10px;
     display: inherit;
     margin: auto;
+}
+
+#ConnectSideBarRooms-div {
+    margin: auto;
+    overflow: auto;
+    width: 80%;
+    height: 200px;
+    border: 1px solid black;
 }
