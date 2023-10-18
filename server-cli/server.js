@@ -19,18 +19,16 @@ app.get('/', (req, res) => {
 
 
 io.on('connection', async (socket) => {
-  var userName;
+  const userName = socket.handshake.auth.userName;
 
-  socket.on('handshake', (msg) => {
-    userName = msg;
-    console.log(userName + ' connected');
-    log.push({username: "server", message: userName+" has connected"});
-    connectedUsers.push({userName: userName, id: socket.id});
-    io.to(socket.id).emit('handshake', socket.id)
-    io.emit('connection', {
-      users:connectedUsers,
-      log:log
-    });
+  console.log(userName + ' connected');
+  log.push({username: "server", message: userName+" has connected"});
+  connectedUsers.push({userName: userName, id: socket.id});
+  io.to(socket.id).emit('handshake', socket.id);
+
+  io.emit('connection', {
+    users:connectedUsers,
+    log:log
   });
 
   socket.on('msg', (msg) => {

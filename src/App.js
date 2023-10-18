@@ -15,16 +15,18 @@ export default function App() {
   const [ id, setID ]                 = useState();
   const [ users, setUsers]            = useState([]);
   const [ rooms, setRooms]            = useState([]);
-  const [ selRoom, setSelRoom ]       = useState('room1');
+  const [ selRoom, setSelRoom ]       = useState();
   const [ log, setLog]                = useState([]);
   const [ serverName, setServerName ] = useState();
 
   function connect(address, userName) {
     disconnect();
-    socket = io(address);
+    socket = io(address, { autoConnect: false});
+    socket.auth = { userName };
+    socket.connect();
 
     function onConnect() {
-      socket.emit("handshake", userName);
+      // socket.emit("handshake", userName);
       setServerName(address+"@Main Room");
       setConnected(1);
       setSelRoom('Main Room')
@@ -59,15 +61,17 @@ export default function App() {
     setUsers([]);
     setLog([]);
     setServerName();
+    setRooms([]);
+    setSelRoom();
     socket.disconnect();
   }
 
-  // function privateMessage(user) {
-  //   setUsers([]);
-  //   setLog([]);
-  //   setServerName(address+"@"+user['userName'])
-  //   socket.emit()
-  // }
+  function privateMessage(user) {
+    setUsers([]);
+    setLog([]);
+    setRooms([rooms,user['userName']]);
+    setSelRoom(user['userName']);
+  }
 
   return (<>
       <TopBar 
@@ -85,6 +89,7 @@ export default function App() {
       <UserList 
         users={users} 
         id={id}
+        privateMessage={privateMessage}
       />
       <MessageBox connected={connected}/>
     </>);
