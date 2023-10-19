@@ -7,7 +7,13 @@ export default function MessageBox(props) {
         const msg = document.getElementById("messageInput")
 
         if (msg.value === '') return;
-        socket.emit("msg", msg.value);
+        if (props.selRoom === 'Main Room') {
+            console.log("not");
+            socket.emit("msg", msg.value);
+        } else {
+            console.log('private message!!');
+            socket.emit('private message', {recipientName: props.selRoom, msg: msg.value});
+        }
         msg.value = "";
     }
 

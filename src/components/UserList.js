@@ -7,7 +7,7 @@ export default function UserList(props) {
             return <li id='UserListElement'>{item['userName']}
             <button id='UserListElementButton' onClick={() => {
                 console.log(item['id'])
-                props.privateMessage(item);
+                props.joinPrivateRoom(item['userName']);
             }}>message</button></li>
         } 
     }
