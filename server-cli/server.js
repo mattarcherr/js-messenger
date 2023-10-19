@@ -70,7 +70,11 @@ io.on('connection', async (socket) => {
       message: msg
     });
 
-    socket.to(recipientId).emit('private message', {senderId: {name: socket.username, id: socket.id}, msgLog: privateMessageLog});
+    console.log("PM: "+socket.username+" to "+ recipientName+" - "+msg)
+    socket.to(recipientId).emit('private message', {
+      senderName: socket.username,
+      msgLog: senderSocket.find((element) => element['reciever'] === recipientName)
+    });
   })
 
   socket.on("request log", ({originalSenderId, roomName}) => {

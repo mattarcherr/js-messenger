@@ -30,7 +30,7 @@ export default function App() {
       setConnected(1);
       setSelRoom('Main Room')
       setRooms(['Main Room'])
-    } 
+    }
     function onHandshake(msg) {
       setID(msg);
     }
@@ -39,19 +39,19 @@ export default function App() {
       setLog(msg['log']);
     } 
     function onNewMessage(msg) {
-      if (this.state.selRoom === 'Main Room') {
-        setLog(msg['log'])
-      }
-    }
+      setLog(msg['log']);
+    };
 
-    function onPrivateMessage({senderId, msgLog}) {
-      var senderName = senderId['name'];
+    function onPrivateMessage({senderName, msgLog}) {
+      console.log(senderName);
+      console.log(msgLog);
+      console.log(msgLog['msgLog']);
       if (!rooms.includes(senderName)) {
-        setRooms([rooms,senderName])
-        setSelRoom(senderName);
+        joinPrivateRoom(senderName);
+        setLog(msgLog['msgLog'])
       }
-      if (this.state.selRoom === senderName) {
-        setLog(msgLog);
+      if (selRoom === senderName) {
+        setLog(msgLog['msgLog']);
       }
     }
 
@@ -83,10 +83,8 @@ export default function App() {
       var localSelRoom = selRoom[0];
     } else { localSelRoom = selRoom }
     if (localSelRoom=== 'Main Room') {
-      console.log('main')
       socket.emit('request log', {originalSenderId: null, roomName: 'Main Room'})
     } else {
-      console.log('pm')
       socket.emit('request log', {originalSenderId: socket.id, roomName: localSelRoom});
     }
   },[selRoom])
