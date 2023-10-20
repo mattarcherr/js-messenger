@@ -99,10 +99,6 @@ io.on('connection', async (socket) => {
   socket.on('disconnect', () => {
     console.log(socket.username + ' disconnected');
     log.push({username: "server", message: socket.username+" has disconnected"});
-    console.log(connectedUsers);
-    console.log(connectedUsers.indexOf({userName: socket.username}));
-    connectedUsers.splice(connectedUsers.indexOf(connectedUsers.find((element) => element['userName'] === socket.username)), 1);
-    console.log(connectedUsers);
 
     io.emit('disconnection', {
       users:connectedUsers,

@@ -84,6 +84,15 @@ export default function App() {
       }
     }
 
+    function onConnectError() {
+        setLog([{
+          username: "server",
+          message:  "Server failed to connect..."
+      }])
+        socket.disconnect()
+      }
+    
+
     socket.on('handshake',     onHandshake);
     socket.on('connect',       onConnect);
     socket.on('connection',    onUserChange);
@@ -92,6 +101,8 @@ export default function App() {
 
     socket.on('private message', onPrivateMessage);
     socket.on('request log',     onRequestLog);
+
+    socket.on('connect_error',   onConnectError);
     return () => {
       socket.off('handshake',     onHandshake);
       socket.off('connect',       onConnect);
@@ -101,6 +112,8 @@ export default function App() {
       
       socket.off('private message', onPrivateMessage);
       socket.off('request log',     onRequestLog);
+
+      socket.on('connect_error',    onConnectError);
   }}
 
   useEffect(() => {
