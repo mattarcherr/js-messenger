@@ -75,27 +75,39 @@ io.on('connection', async (socket) => {
       senderName: socket.username,
       msgLog: senderSocket.find((element) => element['reciever'] === recipientName)
     });
+    io.to(socket.id).emit('private message', {
+      senderName: socket.username,
+      msgLog: senderSocket.find((element) => element['reciever'] === recipientName)
+    });
   })
 
   socket.on("request log", ({originalSenderId, roomName}) => {
     if (roomName === 'Main Room') {
-      socket.to(socket.id).emit('request log', log)
+      io.to(socket.id).emit('request log', {
+        roomName: 'Main Room',
+        log: log
+      });
     } else {
-      // console.log(io.of('/').sockets.get(originalSenderId));
-      // var originalSenderSocket = io.of('/').sockets.get(originalSenderId).privateMessageLogs;
-      // var privateMessageLog = originalSenderSocket.find((element) => element['reciever'] === socket.username);
-      // socket.to(socket.id).emit('request log', privateMessageLog);
+      var privLog = socket.privateMessageLogs.find((element) => element['reciever'] === roomName);
+      io.to(socket.id).emit('request log', {
+        roomName: roomName,
+        log: privLog
+      });
     }
   });
 
   socket.on('disconnect', () => {
     console.log(socket.username + ' disconnected');
     log.push({username: "server", message: socket.username+" has disconnected"});
-    connectedUsers.splice(connectedUsers.indexOf(socket.username), 1);
+    console.log(connectedUsers);
+    console.log(connectedUsers.indexOf({userName: socket.username}));
+    connectedUsers.splice(connectedUsers.indexOf(connectedUsers.find((element) => element['userName'] === socket.username)), 1);
+    console.log(connectedUsers);
 
     io.emit('disconnection', {
       users:connectedUsers,
-      log:log
+      log:log,
+      splitUser: socket.username
     });
   });
 });

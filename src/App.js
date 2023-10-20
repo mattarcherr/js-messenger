@@ -10,12 +10,16 @@ import ConnectionSideBar from './components/ConnectSideBar';
 import io from 'socket.io-client';
 export var socket = io();
 
+var localSelRoom = '';
+var localRooms   = [];
+
 export default function App() {
+  
   const [ connected, setConnected ]   = useState(0);
   const [ id, setID ]                 = useState();
   const [ users, setUsers]            = useState([]);
   const [ rooms, setRooms]            = useState([]);
-  const [ selRoom, setSelRoom ]       = useState('');
+  const [ selRoom, setSelRoom ]       = useState();
   const [ log, setLog]                = useState([]);
   const [ serverName, setServerName ] = useState();
 
@@ -35,28 +39,49 @@ export default function App() {
       setID(msg);
     }
     function onUserChange(msg) {
+      if (msg['splitUser'] !== undefined) {
+        if (localRooms.includes(msg['splitUser'])) {
+          setRooms(localRooms.splice(localRooms.indexOf(msg['splitUser']), 1));
+          setSelRoom('Main Room')
+        }
+      } 
+      console.log(users);
+      console.log(msg['users']);
       setUsers(msg['users']);
       setLog(msg['log']);
-    } 
-    function onNewMessage(msg) {
-      setLog(msg['log']);
-    };
+    }
 
-    function onPrivateMessage({senderName, msgLog}) {
-      console.log(senderName);
-      console.log(msgLog);
-      console.log(msgLog['msgLog']);
-      if (!rooms.includes(senderName)) {
-        joinPrivateRoom(senderName);
-        setLog(msgLog['msgLog'])
-      }
-      if (selRoom === senderName) {
-        setLog(msgLog['msgLog']);
+    function onNewMessage(msg) {
+      if (localSelRoom === 'Main Room') {
+        setLog(msg['log']);
+      } else {
+        // add a icon to signify a message has arrived in main room
       }
     }
 
-    function onRequestLog() {
+    function onPrivateMessage({senderName, msgLog}) {
+      if (senderName === userName) {
+        setLog(msgLog['msgLog']);
+      } else {
+        if (localSelRoom === senderName) {
+          setLog(msgLog['msgLog']);
+        }
+        if (!localRooms.includes(senderName)) {
+          joinPrivateRoom(senderName);
+          setLog(msgLog['msgLog'])
+        }
+      }
+    } 
 
+    function onRequestLog({roomName, log}) {
+      if (log === undefined) return
+      if (roomName === localSelRoom) {
+        if (roomName === 'Main Room') {
+          setLog(log)
+        } else {
+          setLog(log['msgLog'])
+        }
+      }
     }
 
     socket.on('handshake',     onHandshake);
@@ -79,15 +104,17 @@ export default function App() {
   }}
 
   useEffect(() => {
-    if (typeof selRoom === "object") {
-      var localSelRoom = selRoom[0];
-    } else { localSelRoom = selRoom }
-    if (localSelRoom=== 'Main Room') {
+    localSelRoom = selRoom;
+    if (selRoom === 'Main Room') {
       socket.emit('request log', {originalSenderId: null, roomName: 'Main Room'})
     } else {
       socket.emit('request log', {originalSenderId: socket.id, roomName: localSelRoom});
     }
   },[selRoom])
+
+  useEffect(() => {
+    localRooms = rooms;
+  },[rooms])
 
   function disconnect() {
     setConnected(0);
@@ -101,7 +128,7 @@ export default function App() {
 
   function joinPrivateRoom(user) {
     setLog([]);
-    setRooms([rooms,user]);
+    setRooms([...localRooms,user]);
     setServerName('Private Message@'+user)
     setSelRoom(user);
   }
@@ -122,6 +149,7 @@ export default function App() {
       <UserList 
         users={users} 
         id={id}
+        rooms={rooms}
         joinPrivateRoom={joinPrivateRoom}
       />
       <MessageBox 

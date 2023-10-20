@@ -6,8 +6,9 @@ export default function UserList(props) {
         else {
             return <li id='UserListElement'>{item['userName']}
             <button id='UserListElementButton' onClick={() => {
-                console.log(item['id'])
-                props.joinPrivateRoom(item['userName']);
+                if (!props.rooms.includes(item['userName'])) {
+                    props.joinPrivateRoom(item['userName']);
+                }
             }}>message</button></li>
         } 
     }
