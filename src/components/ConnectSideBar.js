@@ -25,6 +25,7 @@ export default function ConnectionSideBar(props) {
                         {props.rooms.length === 0 ? <li>No rooms</li> :
                         props.rooms.map( (item,index) => 
                             <li id='UserListElement'
+                                key={index}
                                 style={ item === props.selRoom ? {} : {backgroundColor: '#bbbbbb'} }
                                 onClick={() => {
                                     props.setSelRoom(item);

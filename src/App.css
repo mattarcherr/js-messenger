@@ -184,23 +184,43 @@ body {
     padding: 0;
 }
 
+
+.ChatBoxListElementClass {
+    background-color: #6B6363;
+    color: white;
+    margin: 10px;
+    padding: 5px;
+    border-radius: 10px;
+}
+
 #ChatBoxListElement {
     background-color: #6B6363;
     color: white;
-    height: 33px;
-}
+    min-height: 33px;
+    width: 60%;
+    overflow-wrap: break-word;
 
+}
 
 #ChatBoxListElementServer {
     background-color: #6B6363;
     color: white;
-    height: 33px;
+    min-height: 33px;
     text-align: center;
 }
 
 #ChatBoxListElementMe {
     background-color: #6B6363;
     color: white;
-    height: 33px;
+    min-height: 33px;
+    width: 60%;
+    float: right;
     text-align: right;
+}
+
+#ChatBoxMessageText {
+    float:left;
+    overflow-wrap:normal;
+    width: 80%;
+    overflow-wrap: break-word;
 }

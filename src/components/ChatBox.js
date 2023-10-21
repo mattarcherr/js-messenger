@@ -1,15 +1,28 @@
 import { socket } from "../App";
 
-function determineSender(username) {
-    console.log(socket.username)
-    if (username === 'server') {
-        return 'ChatBoxListElementServer'
+function determineSender(item,i) {
+    var id;
+    var content;
+    if (item['username'] === 'server') {
+        id = 'ChatBoxListElementServer'
+        content = item['message']
     }
-    else if (username === socket.username) {
-        return 'ChatBoxListElementMe'
+    else if (item['username'] === socket.username) {
+        id = 'ChatBoxListElementMe'
+        content = <>
+                    <span id='ChatBoxMessageText'>{item['message']}</span>
+                    <span id='ChatBoxUsernameText'>: {item['username']}</span>
+                  </>
     } else {
-        return 'ChatBoxListElement'
+        id = 'ChatBoxListElement'
+        content = item['username'] +':  '+ item['message']
     }
+    return  (
+        <li id={id}
+            class='ChatBoxListElementClass'
+            key={i}
+        >  {content} </li>
+    )
 }
 
 export default function ChatBox( log ) {
@@ -18,10 +31,13 @@ export default function ChatBox( log ) {
         <div id='ChatBox'>
             <ul id='ChatBoxList'>
                 {log === [] ? null :
-                    log['log'].map(item =>
-                        <li id={ 
-                            determineSender(item['username'])
-                        }>{item['username'] +": "+ item['message']}</li>    
+                    log['log'].map((item,i) =>
+                        determineSender(item, i)
+                        // <li id={ 
+                        //     determineSender(item['username'])}
+                        //     className='ChatBoxListElementClass'
+                        //     key={i}
+                        // >{item['username'] +": "+ item['message']}</li>    
                     )
                 }
             </ul>

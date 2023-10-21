@@ -46,8 +46,6 @@ export default function App() {
           setSelRoom('Main Room')
         }
       } 
-      console.log(users);
-      console.log(msg['users']);
       setUsers(msg['users']);
       setLog(msg['log']);
     }
