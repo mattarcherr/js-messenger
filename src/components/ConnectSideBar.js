@@ -1,12 +1,4 @@
 export default function ConnectionSideBar(props) {
-    // function isSelected(item,index) {
-    //     if(item === props.selRoom) {
-    //         return <li id='UserListElement' onClick={() => console.log(index)}>{item}</li>
-    //     } 
-    //     else {
-    //         return <li id='UserListElement' style={{backgroundColor: 'blue'}}>{item}</li>
-    //     }
-    // }
     return (
         <div id='ConnectSideBar-div'>
             <div id='ConnectSideBarTitle-div'>

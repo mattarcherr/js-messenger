@@ -26,6 +26,7 @@ export default function App() {
   function connect(address, userName) {
     disconnect();
     socket = io(address, { autoConnect: false});
+    socket.username = userName;
     socket.auth = { userName };
     socket.connect();
 

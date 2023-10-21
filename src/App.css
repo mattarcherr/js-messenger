@@ -29,7 +29,7 @@ body {
 }
 
 #ChatBox-div{
-    background-color: #646b62dc;
+    background-color: gray;
     overflow: auto;
     grid-column: 2;
     grid-row: 2;
@@ -174,4 +174,33 @@ body {
     width: 80%;
     height: 200px;
     border: 1px solid black;
+}
+
+/* ChatBox */
+
+#ChatBoxList {
+    list-style: none;
+    width: 100%;
+    padding: 0;
+}
+
+#ChatBoxListElement {
+    background-color: #6B6363;
+    color: white;
+    height: 33px;
+}
+
+
+#ChatBoxListElementServer {
+    background-color: #6B6363;
+    color: white;
+    height: 33px;
+    text-align: center;
+}
+
+#ChatBoxListElementMe {
+    background-color: #6B6363;
+    color: white;
+    height: 33px;
+    text-align: right;
 }
