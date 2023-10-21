@@ -101,7 +101,7 @@ io.on('connection', async (socket) => {
     log.push({username: "server", message: socket.username+" has disconnected"});
 
     io.emit('disconnection', {
-      users:connectedUsers,
+      users:connectedUsers.splice(connectedUsers.indexOf(connectedUsers.find((element) => element['username'] === socket.username)),1),
       log:log,
       splitUser: socket.username
     });

@@ -84,11 +84,11 @@ export default function App() {
     }
 
     function onConnectError() {
+        disconnect();
         setLog([{
           username: "server",
           message:  "Server failed to connect..."
-      }])
-        socket.disconnect()
+        }]);
       }
     
 
