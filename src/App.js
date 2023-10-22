@@ -41,11 +41,16 @@ export default function App() {
     }
     function onUserChange(msg) {
       if (msg['splitUser'] !== undefined) {
+        console.log(msg['splitUser'])
+        console.log(localRooms)
         if (localRooms.includes(msg['splitUser'])) {
-          setRooms(localRooms.splice(localRooms.indexOf(msg['splitUser']), 1));
+          localRooms.splice(localRooms.indexOf(msg['splitUser'] ,1));
+          console.log(localRooms);
+          setRooms(localRooms);
           setSelRoom('Main Room')
         }
       } 
+      console.log(msg['users'])
       setUsers(msg['users']);
       setLog(msg['log']);
     }
@@ -73,7 +78,7 @@ export default function App() {
     } 
 
     function onRequestLog({roomName, log}) {
-      if (log === undefined) return
+      if (log === undefined) { setLog([]); return }
       if (roomName === localSelRoom) {
         if (roomName === 'Main Room') {
           setLog(log)
@@ -129,7 +134,6 @@ export default function App() {
   },[rooms])
 
   useEffect(() => {
-    console.log("ASD")
     var element = document.getElementById('ChatBox-div');
     element.scrollTop = element.scrollHeight;
   },[log]);
@@ -168,6 +172,7 @@ export default function App() {
         users={users} 
         id={id}
         rooms={rooms}
+        setSelRoom={setSelRoom}
         joinPrivateRoom={joinPrivateRoom}
       />
       <MessageBox 

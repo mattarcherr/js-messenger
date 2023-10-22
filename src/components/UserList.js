@@ -8,6 +8,8 @@ export default function UserList(props) {
             <button id='UserListElementButton' onClick={() => {
                 if (!props.rooms.includes(item['userName'])) {
                     props.joinPrivateRoom(item['userName']);
+                } else {
+                    props.setSelRoom(item['userName']);
                 }
             }}>message</button></li>
         } 
@@ -16,7 +18,7 @@ export default function UserList(props) {
     return (
     <div id='UserList-div'>
         <div id='UserListTitle-div'>
-            <p id='UserListTitle'>Room User List</p>
+            <p id='UserListTitle'>User List</p>
         </div>
         <div id='UserList'>
             <ul id='UserListList'>

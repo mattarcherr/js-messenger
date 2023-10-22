@@ -2,6 +2,7 @@ const { Console } = require('console');
 const express = require('express');
 const app = express();
 const http = require('http');
+const { connect } = require('http2');
 const server = http.createServer(app);
 const { Server } = require("socket.io");
 const io = new Server(server, {
@@ -99,9 +100,14 @@ io.on('connection', async (socket) => {
   socket.on('disconnect', () => {
     console.log(socket.username + ' disconnected');
     log.push({username: "server", message: socket.username+" has disconnected"});
+    console.log(connectedUsers);
+    console.log(connectedUsers.find((element) => element['userName'] === socket.userName));
+    connectedUsers.splice(connectedUsers.indexOf(connectedUsers.find((element) => element['userName'] === socket.username)),1)
+    console.log(connectedUsers);
+    console.log(socket.username);
 
     io.emit('disconnection', {
-      users:connectedUsers.splice(connectedUsers.indexOf(connectedUsers.find((element) => element['username'] === socket.username)),1),
+      users:connectedUsers,
       log:log,
       splitUser: socket.username
     });
