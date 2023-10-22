@@ -128,6 +128,12 @@ export default function App() {
     localRooms = rooms;
   },[rooms])
 
+  useEffect(() => {
+    console.log("ASD")
+    var element = document.getElementById('ChatBox-div');
+    element.scrollTop = element.scrollHeight;
+  },[log]);
+
   function disconnect() {
     setConnected(0);
     setUsers([]);

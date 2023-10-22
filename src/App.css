@@ -191,6 +191,8 @@ body {
     margin: 10px;
     padding: 5px;
     border-radius: 10px;
+    overflow: auto;
+    overflow-wrap: break-word;
 }
 
 #ChatBoxListElement {
@@ -198,8 +200,6 @@ body {
     color: white;
     min-height: 33px;
     width: 60%;
-    overflow-wrap: break-word;
-
 }
 
 #ChatBoxListElementServer {
@@ -214,13 +214,12 @@ body {
     color: white;
     min-height: 33px;
     width: 60%;
-    float: right;
+    margin-left: auto;
     text-align: right;
 }
 
 #ChatBoxMessageText {
     float:left;
-    overflow-wrap:normal;
+    text-align: left;
     width: 80%;
-    overflow-wrap: break-word;
 }

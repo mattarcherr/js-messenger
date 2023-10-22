@@ -19,7 +19,7 @@ function determineSender(item,i) {
     }
     return  (
         <li id={id}
-            class='ChatBoxListElementClass'
+            className='ChatBoxListElementClass'
             key={i}
         >  {content} </li>
     )
