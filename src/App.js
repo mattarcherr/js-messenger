@@ -41,11 +41,8 @@ export default function App() {
     }
     function onUserChange(msg) {
       if (msg['splitUser'] !== undefined) {
-        console.log(msg['splitUser'])
-        console.log(localRooms)
         if (localRooms.includes(msg['splitUser'])) {
           localRooms.splice(localRooms.indexOf(msg['splitUser'] ,1));
-          console.log(localRooms);
           setRooms(localRooms);
           setSelRoom('Main Room')
         }

@@ -11,8 +11,8 @@ function createWindow() {
         }
     })
 
-    // win.loadFile('public/build/index.html')
-    win.loadURL("http://localhost:3000");
+    win.loadFile('public/build/index.html')
+    // win.loadURL("http://localhost:3000");
 }
 
 app.on('ready', createWindow)

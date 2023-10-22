@@ -33,11 +33,6 @@ export default function ChatBox( log ) {
                 {log === [] ? null :
                     log['log'].map((item,i) =>
                         determineSender(item, i)
-                        // <li id={ 
-                        //     determineSender(item['username'])}
-                        //     className='ChatBoxListElementClass'
-                        //     key={i}
-                        // >{item['username'] +": "+ item['message']}</li>    
                     )
                 }
             </ul>
